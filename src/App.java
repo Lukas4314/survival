@@ -12,6 +12,7 @@ public class App extends PApplet {
     float avg;
     int counter;
     int hav = 4;
+    int blend = 3;
 
     public void settings() {
         size(height, width);
@@ -24,25 +25,35 @@ public class App extends PApplet {
                 board[i][j] = 128 + (int) random(-10, 10);
             }
         }
-        for (int k = 0; k < 100; k++) {
+        for (int k = 0; k < 1; k++) {
             for (int i = 0; i < height; i++) {
                 for (int j = 0; j < width; j++) {
                     if (i > hav && j > hav && i < width - hav && j < height - hav) {
-                        // (i != 0 && j != 0 && i != 599 && j != 599) {
-                        board[i][j] = (board[i - 1][j] +
-                                board[i + 1][j] +
-                                board[i][j - 1] +
-                                board[i][j + 1] +
-                                board[i - 1][j - 1] +
-                                board[i + 1][j + 1] +
-                                board[i - 1][j + 1] +
-                                board[i + 1][j - 1]) / 8
-                                + (int) random(-10, 10);
+                        avg = 0;
+                        for (int l = -hav; l <= hav; l++) {
+                            for (int f = -hav; f <= hav; f++) {
+                                avg = avg + board[i - l][j - f];
+                            }
+                        }
+                        avg = avg / (hav * hav);
+                        board[i][j] = (int) avg + (int) random(-10, 10);
+                        /*
+                         * board[i][j] = (board[i - 1][j] +
+                         * board[i + 1][j] +
+                         * board[i][j - 1] +
+                         * board[i][j + 1] +
+                         * board[i - 1][j - 1] +
+                         * board[i + 1][j + 1] +
+                         * board[i - 1][j + 1] +
+                         * board[i + 1][j - 1]) / 8
+                         * + (int) random(-10, 10);
+                         */
                     }
                 }
             }
         }
         counter = 0;
+        avg = 0;
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
                 if (i > hav && j > hav && i < width - hav && j < height - hav) {
