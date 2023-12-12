@@ -15,9 +15,11 @@ public class App extends PApplet {
     PVector[] grads;
     float frequency = 1f / 100f;
     float amplitude = 1f / 5f;
-    int vand = 30;
-    int land = 60;
+    int vand = 90;
+    int land = 130;
     int bjerge = 180;
+    float max = 0;
+    float min = 255;
 
     public void settings() {
         size(height, width);
@@ -35,11 +37,21 @@ public class App extends PApplet {
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
                 float n = noise2(new PVector(j * frequency, i * frequency));
+
                 // System.out.println(n);
                 int temp = (int) (n * 127 + 127);
                 // System.out.println(temp);
-                board[i][j] = temp;
+                // board[i][j] = temp;
 
+                if (temp < vand) {
+                    board[i][j] = color(0, 0, 255);
+                } else if (temp > vand && temp <= land) {
+                    board[i][j] = color(0, 255, 0);
+                } else if (temp > land && temp <= bjerge) {
+                    board[i][j] = color(40);
+                } else if (temp > bjerge) {
+                    board[i][j] = color(200);
+                }
             }
         }
     }
