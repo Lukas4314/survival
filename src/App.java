@@ -8,21 +8,21 @@ public class App extends PApplet {
     }
 
     int height = 600;
-    int width = 600;
+    int width = 1000;
     int[] boardx;
     int[] boardy;
     int[][] board;
     PVector[] grads;
-    float frequency = 1f / 100f;
+    float frequency = 1f / 200f;
     float amplitude = 1f / 5f;
     int vand = 90;
-    int land = 130;
+    int land = 150;
     int bjerge = 180;
     float max = 0;
     float min = 255;
 
     public void settings() {
-        size(height, width);
+        size(width, height);
     }
 
     public void setup() {
@@ -43,12 +43,12 @@ public class App extends PApplet {
                 // System.out.println(temp);
                 // board[i][j] = temp;
 
-                if (temp < vand) {
+                if (temp <= vand) {
                     board[i][j] = color(0, 0, 255);
                 } else if (temp > vand && temp <= land) {
                     board[i][j] = color(0, 255, 0);
                 } else if (temp > land && temp <= bjerge) {
-                    board[i][j] = color(40);
+                    board[i][j] = color(100);
                 } else if (temp > bjerge) {
                     board[i][j] = color(200);
                 }
