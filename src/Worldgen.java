@@ -28,13 +28,13 @@ public class Worldgen extends PApplet {
                 float n = noise2(new PVector(j * frequency, i * frequency));
                 int temp = (int) (n * 127 + 127);
                 if (temp <= vand) {
-                    board[i][j] = color(0, 0, 255);
+                    board[i][j] = 0;
                 } else if (temp > vand && temp <= land) {
-                    board[i][j] = color(0, 255, 0);
+                    board[i][j] = 1;
                 } else if (temp > land && temp <= bjerge) {
-                    board[i][j] = color(100);
+                    board[i][j] = 2;
                 } else if (temp > bjerge) {
-                    board[i][j] = color(200);
+                    board[i][j] = 3;
                 }
             }
         }
